@@ -11,7 +11,7 @@ import Head from "next/head";
 import { CMS_NAME } from "../../lib/constants";
 import markdownToHtml from "../../lib/markdownToHtml";
 
-export default function Post({ post, morePosts, preview }) {
+export default function Post({ post, morePosts, preview, timestamp }) {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -38,6 +38,7 @@ export default function Post({ post, morePosts, preview }) {
                 author={post.author}
               />
               <PostBody content={post.content} />
+              {`timestamp: ${timestamp}`}
             </article>
           </>
         )}
@@ -64,6 +65,7 @@ export async function getStaticProps({ params }) {
         ...post,
         content,
       },
+      timestamp: Date.now(),
     },
     revalidate: 1,
   };
