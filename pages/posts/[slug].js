@@ -67,7 +67,7 @@ export async function getStaticProps({ params }) {
       },
       timestamp: Date.now(),
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 }
 
